@@ -1,0 +1,102 @@
+local suffixes = {"K", "M", "B", "T", "Q","QA"} -- numbers don't go higher than 'Q' in Lua.
+
+local function toSuffixString(n)
+	local i = math.floor(math.log(n, 1e3))
+	local v = math.pow(10, i * 3)
+	return ("%.1f"):format(n / v):gsub("%.?0+$", "") .. (suffixes[i] or "")
+end
+
+local RAMAccount = loadstring(game:HttpGet'https://raw.githubusercontent.com/ic3w0lf22/Roblox-Account-Manager/master/RAMAccount.lua')()
+
+local plr = game.Players.LocalPlayer
+local MyAccount = RAMAccount.new(game:GetService'Players'.LocalPlayer.Name)
+local frag = toSuffixString(game:GetService("Players").LocalPlayer.Data.Fragments.Value)
+local beli = toSuffixString(game:GetService("Players").LocalPlayer.Data.Beli.Value)
+local level = game:GetService("Players").LocalPlayer.Data.Level.Value
+local race = plr.Data.Race.Value
+
+if MyAccount then
+    frutidangco = ""
+    getgenv().tablefruitausea3 = {
+        ["1000000"] ="Quake-Quake",
+        ["1200000"] = "Human-Human: Buddha",
+        ["1500000"] = "String-String",
+        ["1800000"] = "Bird-Bird: Phoenix",
+        ["2100000"] = "Rumble-Rumble",
+        ["2300000"] = "Paw-Paw",
+        ["2500000"] = "Gravity-Gravity",
+        ["2800000"] = "Dough-Dough",
+        ["2900000"] = "Shadow-Shadow",
+        ["3000000"] = "Venom-Venom",
+        ["3200000"] = "Control-Control",
+        ["3500000"] = "Dragon-Dragon"
+    }
+    local max = math.huge
+        local name 
+        for i, v in pairs(game.ReplicatedStorage.Remotes.CommF_:InvokeServer("getInventoryFruits")) do
+            for i1,v1 in pairs(v) do
+                if i1 == "Name" then
+                    for i2, v2 in pairs(getgenv().tablefruitausea3) do
+                        if v1 == v2 then
+                            if tonumber(i2) < tonumber(max) then
+                                max = i2
+                                name = v2
+                               -- print(v2)
+                                frutidangco = frutidangco..v2..", "
+                                --game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("LoadFruit",v1)
+                            end
+                        end
+                    end
+                end
+            end
+        end
+
+    weaponlist = { "Spikey Trident","Saber", "Pale Scarf", "Valkyrie Helm", "Bisento", "Kabucha", "Shisui", "Saddi", "Wando", "Buddy Sword", "Midnight Blade", "Tushita", "Dark Dagger", "Rengoku", "Yama", "Hallow Scythe", "Koku", "Dark Blade", "Dragon Trident", "True Triple Katana", "Pole V2", "Canvander" }
+
+    wpstorage = ""
+    for i, v in pairs(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("getInventoryWeapons")) do
+        for i1,v1 in next, v do
+            if i1 == "Name" then
+                for i2, v2 in pairs(weaponlist) do
+                    if v1 == v2 then
+                        wpstorage = wpstorage..v2..", "
+
+                      --  print(v2)
+                    end
+               -- table.insert(weapon,weaponlist)
+              -- print(v1)
+               --weaponlist = wpstorage..v1..", "
+            end
+        end
+    end
+end
+if game.ReplicatedStorage.Remotes.CommF_:InvokeServer("BuyDragonTalon", true) == 1 then
+    MeleeA = "Dragon Talon"
+else
+    MeleeA = ""
+end
+if game.ReplicatedStorage.Remotes.CommF_:InvokeServer("BuyElectricClaw", true) == 1 then
+    MeleeB = "Electric Claw"
+else
+    MeleeB = ""
+end
+if game.ReplicatedStorage.Remotes.CommF_:InvokeServer("BuySuperhuman", true) == 1 then
+    MeleeC = "Superhuman"
+else
+    MeleeC = ""
+end
+if game.ReplicatedStorage.Remotes.CommF_:InvokeServer("BuyDeathStep", true) == 1 then
+    MeleeD = "Death Step"
+else
+    MeleeD = ""
+end
+if game.ReplicatedStorage.Remotes.CommF_:InvokeServer("BuySharkmanKarate", true) == 1 then
+    MeleeF = "Sharkman Karate"
+else
+    MeleeF = ""
+end
+local Meleehienco = MeleeA .. " ," .. MeleeB .. " ," .. MeleeC .. " ," .. MeleeD .. " ," .. MeleeF
+
+    MyAccount:SetDescription("Level: "..level.." Beli: "..beli.." Fragments: "..frag.."\nInventory: "..wpstorage.."\nFruit Rare:  "..frutidangco.."\nRace: "..race.."\nMelee: "..Meleehienco)
+
+end
