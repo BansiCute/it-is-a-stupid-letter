@@ -1,17 +1,11 @@
-local suffixes = {"K", "M", "B", "T", "Q","QA"} -- numbers don't go higher than 'Q' in Lua.
 
-local function toSuffixString(n)
-	local i = math.floor(math.log(n, 1e3))
-	local v = math.pow(10, i * 3)
-	return ("%.1f"):format(n / v):gsub("%.?0+$", "") .. (suffixes[i] or "")
-end
 
 local RAMAccount = loadstring(game:HttpGet'https://raw.githubusercontent.com/ic3w0lf22/Roblox-Account-Manager/master/RAMAccount.lua')()
 
 local plr = game.Players.LocalPlayer
 local MyAccount = RAMAccount.new(game:GetService'Players'.LocalPlayer.Name)
-local frag = toSuffixString(game:GetService("Players").LocalPlayer.Data.Fragments.Value)
-local beli = toSuffixString(game:GetService("Players").LocalPlayer.Data.Beli.Value)
+local frag = game:GetService("Players").LocalPlayer.Data.Fragments.Value
+local beli = game:GetService("Players").LocalPlayer.Data.Beli.Value
 local level = game:GetService("Players").LocalPlayer.Data.Level.Value
 local race = plr.Data.Race.Value
 
